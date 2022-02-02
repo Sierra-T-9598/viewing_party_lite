@@ -20,16 +20,16 @@ RSpec.describe 'Movie results Page' do
     end
 
     # ADD SAD PATH?
-    # it 'does not show the movie results page', :vcr do
-    #   visit user_discover_index_path(user)
-    #   click_button 'Search Movie By Keyword'
-    #
-    #   expect(status_code).to eq(400)
-    # end
-
-    # it 'displays button to return to discover page', :vcr do
-    #   visit user_movies_path(user)
-    #   expect(page).to have_button("Discover Movies")
-    # end
+  #   it 'does not show the movie results page', :vcr do
+  #     visit user_discover_index_path(user)
+  #     click_button 'Search Movie By Keyword'
+  #
+  #     expect(status_code).to eq(400)
+  #   end
+  #
+  #   it 'displays button to return to discover page' do
+  #     visit user_movies_path(user)
+  #     expect(page).to have_button("Discover Movies")
+  #   end
   end
 end
