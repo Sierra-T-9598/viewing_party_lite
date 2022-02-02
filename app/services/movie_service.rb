@@ -1,4 +1,3 @@
-require 'pry'
 class MovieService
     def self.top_rated_movies
       first_call = get_data('/3/movie/top_rated?page=1')
