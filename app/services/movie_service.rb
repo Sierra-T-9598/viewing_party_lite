@@ -10,6 +10,18 @@ class MovieService
       search = response[:results]
     end
 
+    def self.movie_details(id)
+      response = get_data("/3/movie/#{id}?")
+    end
+
+    def self.movie_credits(id)
+      response = get_data("/3/movie/#{id}/credits?")
+    end
+
+    def self.movie_reviews(id)
+      response = get_data("/3/movie/#{id}/reviews?")
+    end
+
     private
     def self.conn
       Faraday.new(url: "https://api.themoviedb.org") do |faraday|
