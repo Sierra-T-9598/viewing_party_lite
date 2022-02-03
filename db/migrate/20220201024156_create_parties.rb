@@ -4,6 +4,9 @@ class CreateParties < ActiveRecord::Migration[5.2]
       t.date :date
       t.time :time
       t.integer :duration
+      t.integer :movie_id
+      t.integer :host_id
+      t.integer :invitee_id
 
       t.timestamps
     end

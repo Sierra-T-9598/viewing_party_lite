@@ -5,4 +5,16 @@
 <p> <%= button_to "Discover Movies", user_discover_index_path(@user.id), method: :get %> </p>
 <div id="viewing-parties">
   <h3>Viewing Parties</h3>
+<% @user.parties.each do |party| %>
+     <% movie = MoviesFacade.get_movie(party.movie_id) %>
+     <h4><%= movie.title %></h4>
+     <img src=https://image.tmdb.org/t/p/w500/<%= movie.poster_path%>>
+  <p><%= party.date.strftime("%B %d, %Y") %></p>
+  <p><%= party.time.strftime("%l:%M %p") %></p>
+  <p><% if party.host_id == @user.id %></p>
+  <p> Host </p>
+  <% else %>
+  <p> Invited </p>
+  <% end %>
+<% end %>
 </div>

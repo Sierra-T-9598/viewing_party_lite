@@ -19,6 +19,9 @@ ActiveRecord::Schema.define(version: 2022_02_01_024454) do
     t.date "date"
     t.time "time"
     t.integer "duration"
+    t.integer "movie_id"
+    t.integer "host_id"
+    t.integer "invitee_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
