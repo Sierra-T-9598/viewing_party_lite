@@ -5,8 +5,6 @@ RSpec.describe 'User Dashboard', type: :feature do
     let!(:user_1) { create :user }
     let!(:user_2) { create :user }
 
-    let!(:viewing_party_1) { Party.create!(duration: 150, time: Time.now, date: Date.today)}
-
     it 'displays a title with the users name at the top' do
       visit user_path(user_1.id)
       within '#header' do
