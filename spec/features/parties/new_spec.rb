@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe "New Party" do
+
   let(:user_1) { User.create!(name: "Carie Hiller", email: "carie@gmail.com")}
   let(:user_2) { User.create!(name: "Barry Biller", email: "barry@gmail.com")}
   let(:user_3) { User.create!(name: "Carl Hill", email: "carlos@gmail.com")}
@@ -8,10 +9,12 @@ RSpec.describe "New Party" do
   before(:each) do
     visit new_user_movie_party_path(user_1.id, 550)
   end
+  
   describe "user visits movie page and sees a form to create a party" do
     it "displays the movie title" do
       expect(page).to have_content("Fight Club")
     end
+    
     it "has a form to create a new party" do
       fill_in :duration, with: 139
       select("2022", from: "_date_1i")
