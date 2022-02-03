@@ -11,5 +11,10 @@
      <%= image_tag(movie.poster_path) %>
   <p><%= party.date.strftime("%B %d, %Y") %></p>
   <p><%= party.time.strftime("%l:%M %p") %></p>
+  <p><% if party.host_id == @user.id %></p>
+  <p> Host </p>
+  <% else %>
+  <p> Invited </p>
+  <% end %>
 <% end %>
 </div>
