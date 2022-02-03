@@ -9,15 +9,18 @@ class PartiesController < ApplicationController
   def create
     @movie = MoviesFacade.get_movie(params[:movie_id])
     @viewing_party = Party.create(party_params)
+
     if @viewing_party.duration >= @movie.runtime
-      @viewing_party.users << @user
+
+      @users = User.all.each do |user|
+        @viewing_party.users << user
+      end
       redirect_to user_path(@user.id)
     else
       redirect_to new_user_movie_party_path(@user.id, @movie.id)
       flash[:error] = "This party is too short!! Loser..."
     end
   end
-  # if party.user_id == user.id then "host" else "invited"
 
   def user
     @user = User.find(params[:user_id])
@@ -25,6 +28,6 @@ class PartiesController < ApplicationController
 
   private
   def party_params
-    params.permit(:duration, :date, :time, :movie_id)
+    params.permit(:duration, :date, :time, :movie_id, :host_id, :invitee_id)
   end
 end
