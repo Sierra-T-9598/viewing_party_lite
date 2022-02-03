@@ -5,4 +5,11 @@
 <p> <%= button_to "Discover Movies", user_discover_index_path(@user.id), method: :get %> </p>
 <div id="viewing-parties">
   <h3>Viewing Parties</h3>
+<% @user.parties.each do |party| %>
+     <% movie = MoviesFacade.get_movie(party.movie_id) %>
+     <h4><%= movie.title %></h4>
+     <%= image_tag(movie.poster_path) %>
+  <p><%= party.date.strftime("%B %d, %Y") %></p>
+  <p><%= party.time.strftime("%l:%M %p") %></p>
+<% end %>
 </div>
