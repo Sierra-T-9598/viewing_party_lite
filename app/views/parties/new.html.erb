@@ -4,6 +4,8 @@
 
 <p><%= form_with url: user_movie_parties_path(@user.id, @movie.id), method: :post, local: true do |f|  %></p>
      <%= f.hidden_field :movie_id, value: @movie.id %>
+     <%= f.hidden_field :host_id, value: @user.id %>
+
   <p><%= f.label :duration %>
      <%= f.number_field :duration, min: @movie.runtime %></p>
 
@@ -13,9 +15,14 @@
   <p><%= f.label :time %></p>
   <p><%= f.time_select :time, :ignore_date => true, :ampm => true %></p>
 
+
   <% @users.each do |user| %>
-  <p><%= check_box_tag "Invited[]", user.id %>
-    <%= user.name %></p>
+    <% if user.id != @user.id %>
+      <p><%= check_box_tag "Invited[]", user.id %>
+        <%= user.name %></p>
+        <%= f.hidden_field :invitee_id, value: user.id %>
+    <% end %>
+
   <% end %>
 
   <p><%= f.submit "Create Party" %></p>
