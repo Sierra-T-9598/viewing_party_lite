@@ -5,4 +5,14 @@ class Party < ApplicationRecord
   # belongs_to :movie
   has_many :user_parties
   has_many :users, through: :user_parties
+
+  def host_name(host_id)
+    users.where('users.id = ?', host_id)
+    .first
+    .name
+  end
+
+  def invited(host_id)
+    users.where.not('users.id = ?', host_id)
+  end
 end
