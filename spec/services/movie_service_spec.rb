@@ -21,8 +21,8 @@ RSpec.describe MovieService do
     context '.movie_search' do
       it 'returns search data', :vcr do
         response = MovieService.movie_search('fight')
-        expect(response).to be_a Hash
-        
+        expect(response).to be_a Array
+
         expect(response.first).to have_key :title
         expect(response.first[:title]).to be_a String
 
@@ -31,7 +31,7 @@ RSpec.describe MovieService do
       end
     end
     context '.movie_details' do
-      it 'returns search data', :vcr do
+      it 'returns details data', :vcr do
         response = MovieService.movie_details(550)
         expect(response).to be_a Hash
 
@@ -49,7 +49,7 @@ RSpec.describe MovieService do
       end
     end
     context '.movie_credits' do
-      it 'returns search data', :vcr do
+      it 'returns credits data', :vcr do
         response = MovieService.movie_credits(550)
         expect(response).to be_a Hash
 
