@@ -21,8 +21,8 @@ RSpec.describe MovieService do
     context '.movie_search' do
       it 'returns search data', :vcr do
         response = MovieService.movie_search('fight')
-        expect(response).to be_a Hash
-        
+        expect(response).to be_a Array
+
         expect(response.first).to have_key :title
         expect(response.first[:title]).to be_a String
 
