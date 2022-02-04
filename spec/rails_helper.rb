@@ -95,24 +95,3 @@ VCR.configure do |config|
   config.configure_rspec_metadata!
   config.allow_http_connections_when_no_cassette = true
 end
-
-def data
-  {
-              "adult": false,
-              "backdrop_path": "/xRyINp9KfMLVjRiO5nCsoRDdvvF.jpg",
-              "genre_ids": [
-                  18
-              ],
-              "id": 550,
-              "original_language": "en",
-              "original_title": "Fight Club",
-              "overview": "A ticking-time-bomb insomniac and a slippery soap salesman channel primal male aggression into a shocking new form of therapy. Their concept catches on, with underground \"fight clubs\" forming in every town, until an eccentric gets in the way and ignites an out-of-control spiral toward oblivion.",
-              "popularity": 60.783,
-              "poster_path": "/pB8BM7pdSp6B6Ih7QZ4DrQ3PmJK.jpg",
-              "release_date": "1999-10-15",
-              "title": "Fight Club",
-              "video": false,
-              "vote_average": 8.4,
-              "vote_count": 23389
-          }
-end
