@@ -4,12 +4,10 @@ Rails.application.routes.draw do
   get '/register', to: 'users#new'
   post '/register', to: 'users#create'
 
-  resources :users do
-    resources :discover
-    resources :movies do
-      resources :parties
-    end 
+  resources :users, only: [:show, :new, :create] do
+    resources :discover, only: [:index]
+    resources :movies, only: [:index, :show] do
+      resources :parties, only: [:new, :create]
+    end
   end
-
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
