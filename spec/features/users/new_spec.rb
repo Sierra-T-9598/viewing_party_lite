@@ -25,7 +25,7 @@ RSpec.describe "register" do
     fill_in :email, with: nil
 
     click_button "Create New User"
-    expect(current_path).to eq(new_user_path)
+    expect(current_path).to eq('/register')
     expect(page).to have_content("This user could not be created. Please check your form.")
   end
 end

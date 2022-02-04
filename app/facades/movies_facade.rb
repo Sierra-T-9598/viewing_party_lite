@@ -9,8 +9,12 @@ class MoviesFacade
 
     def get_search(keyword)
       @movies = MovieService.movie_search(keyword)
-      @movies.map do |movie|
-        Movie.new(movie)
+      if @movies == nil
+        
+      else
+        @movies.map do |movie|
+          Movie.new(movie)
+        end
       end
     end
 

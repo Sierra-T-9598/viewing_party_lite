@@ -21,7 +21,6 @@
       <% if user.id != @user.id %>
       <p><%= f.label "#{user.name}" %>
       <%= f.check_box "#{user.name}" %></p>
-      <%= f.hidden_field :invitee_id, value: user.id %>
     <% end %>
   </div>
 
