@@ -2,9 +2,11 @@ require 'rails_helper'
 
 RSpec.describe 'landing page', type: :feature do
   describe 'user visits landing page' do
-    let!(:user_1) { create(:user) }
-    let!(:user_2) { create(:user) }
-    let!(:user_3) { create(:user) }
+    before(:each) do
+      @user_1 = User.create!(name: "Carie Hiller", email: "carie@gmail.com")
+      @user_2 = User.create!(name: "Barry Hiller", email: "barie@gmail.com")
+      @user_3 = User.create!(name: "Carl Hiller", email: "cccarie@gmail.com")
+    end
 
     it 'displays title of application' do
       visit '/'
@@ -19,13 +21,12 @@ RSpec.describe 'landing page', type: :feature do
       expect(page).to have_button('Create New User')
     end
 
-    #need to figure out factorybot test data caching
     it 'displays list of Existing Users as links to each user dashboard' do
       visit '/'
       expect(User.count).to eq(3)
-      # expect(page).to have_link("#{user_1.name}'s Dashboard", href: user_path(user_1.id) )
-      # expect(page).to have_link("#{user_2.name}'s Dashboard", href: user_path(user_2.id) )
-      # expect(page).to have_link("#{user_3.name}'s Dashboard", href: user_path(user_3.id) )
+      expect(page).to have_link("#{@user_1.name}", href: user_path(@user_1.id) )
+      expect(page).to have_link("#{@user_2.name}", href: user_path(@user_2.id) )
+      expect(page).to have_link("#{@user_3.name}", href: user_path(@user_3.id) )
     end
 
     it 'displays link to go back to landing page' do
