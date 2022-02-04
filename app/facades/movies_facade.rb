@@ -1,4 +1,3 @@
-require './app/poros/movie.rb'
 class MoviesFacade
   class << self
     def get_top_movies
