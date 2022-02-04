@@ -1,6 +1,10 @@
-<h3>Movie Title- Rating</h3>
-<% @movies.each do |movie| %>
-  <p><%= link_to movie.title, user_movie_path(@user.id, movie.id) %>- <%= movie.vote_average %></p>
+<h3>Movie Title</h3>
+<% if @movies == nil %>
+   Not a valid search
+<% else %>
+  <% @movies.each do |movie| %>
+    <p><%= link_to movie.title, user_movie_path(@user.id, movie.id) %> - Rating: <%= movie.vote_average %></p>
+  <% end %>
 <% end %>
 
 <p><%= button_to "Discover Movies", user_discover_index_path(@user.id), method: :get %></p>
