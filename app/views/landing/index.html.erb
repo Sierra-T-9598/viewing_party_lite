@@ -4,5 +4,3 @@
 <% @users.each do |user| %>
   <p><%= link_to user.name, user_path(user.id) %>'s Dashboard</p>
 <% end %>
-
-<%= link_to "Landing Page", root_path %>
