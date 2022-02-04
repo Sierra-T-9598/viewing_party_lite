@@ -5,9 +5,6 @@ RSpec.describe Party, type: :model do
     it { should validate_presence_of(:date)}
     it { should validate_presence_of(:time)}
     it { should validate_presence_of(:duration)}
-    # it { should validate_presence_of(:movie_id)}
-    # it { should validate_presence_of(:host_id)}
-    # it { should validate_presence_of(:invitee_id)}
   end
 
   describe 'relationships' do
@@ -20,7 +17,7 @@ RSpec.describe Party, type: :model do
     let(:user_2) { create :user }
     let(:user_3) { create :user }
 
-    let(:party) { Party.create!(duration: 139, date: Date.new , time: Time.now, movie_id: 550, host_id: user_1.id, invitee_id: nil)}
+    let(:party) { Party.create!(duration: 139, date: Date.new , time: Time.now, movie_id: 550, host_id: user_1.id)}
 
     describe '#host_name' do
       it 'returns the host the name' do
