@@ -22,9 +22,21 @@ RSpec.describe 'User Dashboard', type: :feature do
     end
 
     it 'displays a section that lists viewing parties' do
-      #More on this as we encounter later user stories
       visit user_path(user_1.id)
       expect(page).to have_content("Viewing Parties")
+
+      visit new_user_movie_party_path(user_1.id, 550)
+      fill_in :duration, with: 139
+      select("2022", from: "_date_1i")
+      select("February", from: "_date_2i")
+      select("2", from: "_date_3i")
+      select("08 PM", from: "_time_4i")
+      select("15", from: "_time_5i")
+
+      click_button "Create Party"
+      expect(current_path).to eq(user_path(user_1.id))
+      expect(page).to have_link("Fight Club", href: user_movie_path(user_1.id, 550))
+      expect(page).to have_content("You're the host!")
     end
   end
 end
