@@ -9,12 +9,12 @@ RSpec.describe "New Party" do
   before(:each) do
     visit new_user_movie_party_path(user_1.id, 550)
   end
-  
+
   describe "user visits movie page and sees a form to create a party" do
     it "displays the movie title" do
       expect(page).to have_content("Fight Club")
     end
-    
+
     it "has a form to create a new party" do
       fill_in :duration, with: 139
       select("2022", from: "_date_1i")
@@ -22,12 +22,13 @@ RSpec.describe "New Party" do
       select("2", from: "_date_3i")
       select("08 PM", from: "_time_4i")
       select("15", from: "_time_5i")
-      # check(user_2.id)
-      # check(user_3.id)
+      # within "#user-#{user_2.id}" do
+      #   check
+      # end
       click_button "Create Party"
       expect(current_path).to eq(user_path(user_1.id))
       expect(page).to have_content("Fight Club")
-      expect(page).to have_content("Host")
+      expect(page).to have_content("You're the host!")
 
     end
 
@@ -76,7 +77,7 @@ RSpec.describe "New Party" do
       expect(page).to have_content("February 02, 2022")
       expect(page).to have_content("8:15 PM")
       expect(page).to have_content("Fight Club")
-      expect(page).to have_content("Invited")
+      expect(page).to have_content("You're Invited!")
     end
   end
 end
