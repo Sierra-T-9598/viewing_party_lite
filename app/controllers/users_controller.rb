@@ -8,11 +8,11 @@ class UsersController < ApplicationController
 
   def create
     user = User.create(user_params)
-    if user.save(user_params)
+    if user.save
       redirect_to user_path(user.id)
       flash[:alert] = "Welcome to your Viewing Party!"
     else
-      redirect_to new_user_path
+      redirect_to '/register'
       flash[:error] = "This user could not be created. Please check your form."
     end
   end
