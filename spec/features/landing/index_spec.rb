@@ -3,9 +3,9 @@ require 'rails_helper'
 RSpec.describe 'landing page', type: :feature do
   describe 'user visits landing page' do
     before(:each) do
-      @user_1 = User.create!(name: "Carie Hiller", email: "carie@gmail.com")
-      @user_2 = User.create!(name: "Barry Hiller", email: "barie@gmail.com")
-      @user_3 = User.create!(name: "Carl Hiller", email: "cccarie@gmail.com")
+      @user_1 = User.create!(name: "Carie Hiller", email: "carie@gmail.com", password: '123')
+      @user_2 = User.create!(name: "Barry Hiller", email: "barie@gmail.com", password: '1234')
+      @user_3 = User.create!(name: "Carl Hiller", email: "cccarie@gmail.com", password: '12345')
     end
 
     it 'displays title of application' do

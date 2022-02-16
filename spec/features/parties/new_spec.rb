@@ -3,9 +3,9 @@ require 'rails_helper'
 RSpec.describe "New Party" do
 
   before(:each) do
-    @user_1 = User.create!(name: "Carie Hiller", email: "carie@gmail.com")
-    @user_2 = User.create!(name: "Barry Hiller", email: "barie@gmail.com")
-    @user_3 = User.create!(name: "Carl Hiller", email: "cccarie@gmail.com")
+    @user_1 = User.create!(name: "Carie Hiller", email: "carie@gmail.com", password: '123')
+    @user_2 = User.create!(name: "Barry Hiller", email: "barie@gmail.com", password: '1234')
+    @user_3 = User.create!(name: "Carl Hiller", email: "cccarie@gmail.com", password: '12345')
     visit new_user_movie_party_path(@user_1.id, 550)
   end
 
@@ -24,6 +24,7 @@ RSpec.describe "New Party" do
       page.check(@user_2.name)
       page.check(@user_3.name)
       click_button "Create Party"
+
       expect(current_path).to eq(user_path(@user_1.id))
       expect(page).to have_content("Fight Club")
       expect(page).to have_content("You're the host!")
@@ -39,6 +40,7 @@ RSpec.describe "New Party" do
       page.check(@user_2.name)
       page.check(@user_3.name)
       click_button "Create Party"
+
       expect(current_path).to eq(new_user_movie_party_path(@user_1.id, 550))
       expect(page).to have_content("This party is too short!! Loser...")
     end
@@ -53,6 +55,7 @@ RSpec.describe "New Party" do
       page.check(@user_2.name)
       page.check(@user_3.name)
       click_button "Create Party"
+
       expect(current_path).to eq(user_path(@user_1.id))
       expect(page).to have_content("February 02, 2022")
       expect(page).to have_content("8:15 PM")
@@ -69,8 +72,10 @@ RSpec.describe "New Party" do
       page.check(@user_2.name)
       page.check(@user_3.name)
       click_button "Create Party"
+
       expect(current_path).to eq(user_path(@user_1.id))
       visit user_path(@user_2.id)
+
       expect(page).to have_content("February 02, 2022")
       expect(page).to have_content("8:15 PM")
       expect(page).to have_content("Fight Club")
