@@ -1,10 +1,13 @@
 Rails.application.routes.draw do
   root 'landing#index'
 
-  get '/register', to: 'users#new'
-  # post '/register', to: 'users#create'
+  get '/login', to: 'users#login_form'
+  post '/login', to: 'users#login'
 
-  resources :users, only: [:show, :create] do
+  get '/register', to: 'users#new'
+  post '/register', to: 'users#create'
+
+  resources :users, only: [:show, :new, :create] do
     resources :discover, only: [:index]
     resources :movies, only: [:index, :show] do
       resources :parties, only: [:new, :create]

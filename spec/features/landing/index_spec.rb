@@ -21,6 +21,14 @@ RSpec.describe 'landing page', type: :feature do
       expect(page).to have_button('Create New User')
     end
 
+    it 'displays link for Log In' do
+      visit '/'
+      expect(page).to have_link('Log In')
+
+      click_link 'Log In'
+      expect(current_path).to eq('/login')
+    end
+
     it 'displays list of Existing Users as links to each user dashboard' do
       visit '/'
       expect(User.count).to eq(3)
