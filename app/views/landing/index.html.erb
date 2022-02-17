@@ -1,5 +1,6 @@
 <section id="header"><h1>Viewing Party Lite</h1></section>
 <%= button_to "Create New User", '/register', method: :get %>
+<%= link_to 'Log In', login_path %>
 <h3>All Users:</h3>
 <% @users.each do |user| %>
   <p><%= link_to user.name, user_path(user.id) %>'s Dashboard</p>
