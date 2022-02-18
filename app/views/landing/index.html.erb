@@ -1,9 +1,9 @@
 <section id="header"><h1>Viewing Party Lite</h1></section>
-<% if current_user %>
-  <%= link_to "Logout" , '/logout', method: :delete %>
+<% if current_user.nil? %>
+<%= button_to "Create New User", '/register', method: :get %>
+<%= link_to 'Log In', login_path %>
 <% else %>
-  <%= button_to "Create New User", '/register', method: :get %>
-  <%= link_to 'Log In', login_path %>
+<%= link_to "Logout" , '/logout', method: :delete %>
 <% end %>
 
 <h3>All Users:</h3>

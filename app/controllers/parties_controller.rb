@@ -22,9 +22,9 @@ class PartiesController < ApplicationController
     end
   end
 
-  # def user
-  #   @user = User.find(params[:user_id])
-  # end
+  def user
+    @user = current_user
+  end
 
   private
   def party_params
