@@ -3,8 +3,8 @@
    Not a valid search
 <% else %>
   <% @movies.each do |movie| %>
-    <p><%= link_to movie.title, user_movie_path(@user.id, movie.id) %> - Rating: <%= movie.vote_average %></p>
+    <p><%= link_to movie.title, movie_path(movie.id) %> - Rating: <%= movie.vote_average %></p>
   <% end %>
 <% end %>
 
-<p><%= button_to "Discover Movies", user_discover_index_path(@user.id), method: :get %></p>
+<p><%= button_to "Discover Movies", discover_index_path, method: :get %></p>

@@ -1,6 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe "register" do
+  before(:each) do
+    @user = create(:user)
+    allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user)
+  end
+
   it 'registers a new user with name, email, password, and password confirmation' do
     visit '/register'
 
@@ -14,7 +19,7 @@ RSpec.describe "register" do
 
     click_button "Create New User"
 
-    expect(current_path).to eq("/users/#{User.last.id}")
+    expect(current_path).to eq(dashboard_path)
   end
 
   it 'only creates new user if passwords match and email is valid' do

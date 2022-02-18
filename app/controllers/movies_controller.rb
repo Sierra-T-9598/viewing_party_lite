@@ -1,5 +1,5 @@
 class MoviesController < ApplicationController
-  before_action :user
+  # before_action :user
 
   def index
     if params[:q] == "top_rated"
@@ -15,7 +15,7 @@ class MoviesController < ApplicationController
     @movie_reviews = MoviesFacade.get_reviews(params[:id])
   end
 
-  def user
-    @user = User.find(params[:user_id])
-  end
+  # def user
+  #   @user = User.find(params[:user_id])
+  # end
 end

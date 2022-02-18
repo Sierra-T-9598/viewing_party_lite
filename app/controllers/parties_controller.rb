@@ -1,5 +1,5 @@
 class PartiesController < ApplicationController
-  before_action :user
+  before_action :require_user
   def new
     @users = User.all
 
@@ -15,16 +15,16 @@ class PartiesController < ApplicationController
       @users = User.all.each do |user|
         @viewing_party.users << user
       end
-      redirect_to user_path(@user.id)
+      redirect_to dashboard_path
     else
-      redirect_to new_user_movie_party_path(@user.id, @movie.id)
+      redirect_to new_movie_party_path(@movie.id)
       flash[:error] = "This party is too short!! Loser..."
     end
   end
 
-  def user
-    @user = User.find(params[:user_id])
-  end
+  # def user
+  #   @user = User.find(params[:user_id])
+  # end
 
   private
   def party_params

@@ -4,7 +4,7 @@ RSpec.describe 'Movie Details Page', type: :feature do
   let(:user) { create :user }
 
   before(:each) do
-    visit user_movie_path(user.id, 550)
+    visit movie_path(550)
   end
 
   describe 'user visits a specific movie page' do

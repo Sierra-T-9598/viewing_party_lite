@@ -32,9 +32,9 @@ RSpec.describe 'landing page', type: :feature do
     it 'displays list of Existing Users as links to each user dashboard' do
       visit '/'
       expect(User.count).to eq(3)
-      expect(page).to have_link("#{@user_1.name}", href: user_path(@user_1.id) )
-      expect(page).to have_link("#{@user_2.name}", href: user_path(@user_2.id) )
-      expect(page).to have_link("#{@user_3.name}", href: user_path(@user_3.id) )
+      expect(page).to have_link("#{@user_1.name}", href: dashboard_path )
+      expect(page).to have_link("#{@user_2.name}", href: dashboard_path )
+      expect(page).to have_link("#{@user_3.name}", href: dashboard_path )
     end
 
     it 'displays link to go back to landing page' do

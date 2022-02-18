@@ -2,30 +2,32 @@ require 'rails_helper'
 
 RSpec.describe 'User Dashboard', type: :feature do
   describe 'user visits /users/:id, where :id is valid' do
-    let!(:user_1) { create :user }
-    let!(:user_2) { create :user }
+
+    before(:each) do
+      @user_1 = create(:user)
+      @user_2 = create(:user)
+      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user_1)
+    end
 
     it 'displays a title with the users name at the top' do
-      visit user_path(user_1.id)
+      visit dashboard_path
       within '#header' do
-        expect(page).to have_content("#{user_1.name}'s Dashboard")
-        expect(page).to_not have_content("#{user_2.name}'s Dashboard")
+        expect(page).to have_content("#{@user_1.name}'s Dashboard")
+        expect(page).to_not have_content("#{@user_2.name}'s Dashboard")
       end
     end
 
     it 'has a button to Discover Movies' do
-      visit user_path(user_1.id)
+      visit dashboard_path
       expect(page).to have_button("Discover Movies")
 
       click_button "Discover Movies"
-      expect(current_path).to eq(user_discover_index_path(user_1.id))
+      expect(current_path).to eq(discover_index_path)
     end
 
-    it 'displays a section that lists viewing parties' do
-      visit user_path(user_1.id)
-      expect(page).to have_content("Viewing Parties")
-
-      visit new_user_movie_party_path(user_1.id, 550)
+    it 'displays a section that lists viewing parties after they are created' do
+      visit new_movie_party_path(550)
+      
       fill_in :duration, with: 139
       select("2022", from: "_date_1i")
       select("February", from: "_date_2i")
@@ -34,8 +36,9 @@ RSpec.describe 'User Dashboard', type: :feature do
       select("15", from: "_time_5i")
 
       click_button "Create Party"
-      expect(current_path).to eq(user_path(user_1.id))
-      expect(page).to have_link("Fight Club", href: user_movie_path(user_1.id, 550))
+
+      expect(current_path).to eq(dashboard_path)
+      expect(page).to have_link("Fight Club", href: movie_path(550))
       expect(page).to have_content("You're the host!")
     end
   end

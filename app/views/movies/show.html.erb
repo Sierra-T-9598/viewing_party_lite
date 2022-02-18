@@ -1,5 +1,5 @@
-<p><%= button_to "Create Viewing Party", new_user_movie_party_path(@user.id, @movie.id), method: :get %></p>
-<p><%= button_to "Discover Movies", user_discover_index_path(@user.id), method: :get %></p>
+<p><%= button_to "Create Viewing Party", new_movie_party_path(@movie.id), method: :get %></p>
+<p><%= button_to "Discover Movies", discover_index_path, method: :get %></p>
 
 <h1><%= @movie.title %></h1>
 <li>Rating: <%= @movie.vote_average %></li>
