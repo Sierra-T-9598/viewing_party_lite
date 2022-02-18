@@ -15,8 +15,7 @@ RSpec.describe 'Log Out' do
     expect(page).to_not have_link('Log In')
     visit root_path
     click_link 'Logout'
-    visit root_path
-    save_and_open_page
+
     expect(current_path).to eq(root_path)
     expect(page).to have_link('Log In')
   end
