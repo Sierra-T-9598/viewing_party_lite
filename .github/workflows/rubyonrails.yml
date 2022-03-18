@@ -4,55 +4,54 @@
 #
 # This workflow will install a prebuilt Ruby version, install dependencies, and
 # run tests and linters.
-name: "Ruby on Rails CI"
+name: Ruby
+
 on:
   push:
-    branches: [ main ]
+    branches:
+      - main
+      - development
   pull_request:
-    branches: [ main ]
+
 jobs:
   test:
+
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        ruby-version: ['2.7.2']
+
     services:
       postgres:
-        image: postgres:11-alpine
+        image: postgres:14
         ports:
-          - "5432:5432"
+          - 5432:5432
         env:
-          POSTGRES_DB: viewing_party_lite_test
-          POSTGRES_USER: viewing_party_lite
-          POSTGRES_PASSWORD: ""
-    env:
-      RAILS_ENV: test
-      DATABASE_URL: "postgres://rails:password@localhost:5432/viewing_party_lite_test"
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-      # Add or replace dependency steps here
-      - name: Install Ruby and gems
-        uses: ruby/setup-ruby@8f312efe1262fb463d906e9bf040319394c18d3e # v1.92
-        with:
-          bundler-cache: true
-      # Add or replace database setup steps here
-      - name: Set up database schema
-        run: rails db:{drop,create,migrate}
-      # Add or replace test runners here
-      - name: Run tests
-        run: bundle exec rspec
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
 
-  lint:
-    runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-      - name: Install Ruby and gems
-        uses: ruby/setup-ruby@8f312efe1262fb463d906e9bf040319394c18d3e # v1.92
-        with:
-          bundler-cache: true
-      # Add or replace any other lints here
-      - name: Security audit dependencies
-        run: bin/bundler-audit --update
-      - name: Security audit application code
-        run: bin/brakeman -q -w2
-      - name: Lint Ruby files
-        run: bin/rubocop --parallel
+    - uses: actions/checkout@v2
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: ${{ matrix.ruby-version }}
+        bundler-cache: true # runs 'bundle install' and caches installed gems automatically
+    - name: install dependencies
+      run: bundle install
+    - name: Setup Database
+      run: |
+        cp config/database.yml.github-actions config/database.yml
+        bundle exec rake db:create
+        bundle exec rake db:schema:load
+      env:
+        RAILS_ENV: test
+        POSTGRES_USER: postgres
+        POSTGRES_PASSWORD: postgres
+    - name: Run RSpec
+      run: COVERAGE=true bundle exec rspec  --require rails_helper
+      env:
+        RAILS_ENV: test
+        POSTGRES_USER: postgres
+        POSTGRES_PASSWORD: postgres
