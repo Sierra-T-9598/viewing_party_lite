@@ -31,8 +31,11 @@ jobs:
       run: bundle install
     - name: Setup Database
       run: |
-       bundle exec rails db:create
-       bundle exec rails db:migrate
+    - name: Setup Database
+      run: |
+        cp config/database.yml.github-actions config/database.yml
+        bundle exec rake db:create
+        bundle exec rake db:schema:load
       env:
         RAILS_ENV: test bundle exec rake
         POSTGRES_USER: postgres
