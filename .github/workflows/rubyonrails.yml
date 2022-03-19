@@ -30,10 +30,11 @@ jobs:
     - name: install dependencies
       run: bundle install
     - name: Setup Database
-      run: 
-       rails db:migrate
+      run: |
+       bundle exec rails db:create
+       bundle exec rails db:migrate
       env:
-        RAILS_ENV: test
+        RAILS_ENV: test bundle exec rake
         POSTGRES_USER: postgres
         POSTGRES_PASSWORD: postgres
     - name: Run RSpec
